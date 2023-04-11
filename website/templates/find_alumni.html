@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% block title %}
+Equity Alumni Connect|Find Alumni
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+    <div class="col-md-2 d-none d-md-block bg-light sidebar-wrapper">
+        <div class="position-sticky sticky-top">
+        <nav class="bg-light sidebar">
+            <!-- Events sidebar -->
+            <div class="sidebar-sticky">
+            <form class="sidebar-search" action="" method="POST">
+                <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search...">
+                <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></span></button>
+                </div>
+            </form>
+
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                <span>Filter By</span>
+                <a class="d-flex align-items-center text-muted" href="#">
+                </a>
+            </h6>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                <a class="nav-link active" href="#">
+                    Institution
+                </a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">
+                    Course/Specialization
+                </a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">
+                    Location
+                </a>
+                </li>
+            </ul>
+            </div>
+        </nav>
+        </div>
+    </div>
+    <style>
+      .profile-card {
+          background-color: rgba(130, 39, 27, 0.09);
+          box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+          max-width: 900px;
+          min-height: 250px;
+          padding-top: 10px;
+          padding-bottom: 10px;
+          margin-bottom: 20px
+      }
+      .profile-card  a {
+          margin-left: auto;
+          margin-right: auto;
+          padding: 30px;
+      }
+      .profile-card img {
+          width:150px;
+          height: 150px;
+          border-radius: 50%;
+          background-color: #fff;
+      }
+  </style>
+
+    <main role="main" class="col-md-10 px-4">
+        <div class="container">
+    {%if scholars %}
+    {% for scholar in scholars %}
+        <div class="row d-flex flex-row flex-wrap profile-card" style="">
+            <div class="col-lg-6 col-md-6 col-sm-4" >
+                <img class="img-fluid" src="{{url_for('static', filename='images/male-avatar2.png')}}" alt="event one image" style="width: 200px; height: 200px; object-fit:cover;">
+            </div>
+        {% for scholar_profile in scholar.user_profile%}
+            <div class="col-lg-6 col-md-6 col-sm-8 align-center" style="width:50%;">
+              <h2>{{scholar.firstname}} {{scholar.lastname}}</h2>
+                <p>School: {{ scholar_profile.school_university_college }}</p>
+                <p>Course/Specialization: {{scholar_profile.course}}</p>
+                <p>Interests:  {{scholar_profile.interests}}</p>
+                <p>Hobbies:  {{scholar_profile.hobbies}}</p>
+                <a href="#" class="text-center" style="text-decoration: none; font-weight: bold; color:#A32A29; font-size: 1.2rem">View Full Profile</a>
+            </div>
+          {%endfor%}
+        </div>
+    {% endfor %}
+  {% endif %}  
+       
+        
+        </div>
+    
+    </div>
+</div>
+  
+{% endblock %}
